@@ -13,6 +13,12 @@ body {
   background-color: #ffd0a0;
   font-size: 2rem;
   flex-grow: 9;
+  padding: 1%;
+  border: 5px solid #ffd0a0;
+}
+
+#todo-content-title-input:focus {
+  border: 5px solid #ffaa88;
 }
 
 #register-button {
@@ -21,27 +27,18 @@ body {
   font-size: 1.7rem;
 }
 
+#register-button:focus {
+  background-color: #ffaabb;
+}
+
+#register-button::-moz-focus-inner {
+  border: 0;
+}
+
 #todo-content-list {
   list-style: none;
   margin: 0;
   padding: 1%;
-}
-
-#todo-content-list > li {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-#todo-content-list > li:nth-child(odd) {
-  background-color: #ffdddd;
-}
-
-#todo-content-list > li:nth-child(even) {
-  background-color: #ffeeee;
-}
-
-#todo-content-list > li:hover {
-  background-color: #ffaaaa;
 }
 
 .content-title {
@@ -49,8 +46,22 @@ body {
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.content-title:nth-child(odd) {
+  background-color: #ffdddd;
+}
+
+.content-title:nth-child(even) {
+  background-color: #ffeeee;
 }
 
 .content-title:hover {
+  background-color: #ffaaaa;
+}
+
+.content-title:focus {
   background-color: cornflowerblue;
 }
