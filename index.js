@@ -1,6 +1,6 @@
-const contentList = document.getElementById("todo-list");
+const contentList = document.getElementById("todo-content-list");
 const registerButton = document.getElementById("register-button");
-const inputBox = document.getElementById("element-name");
+const titleInput = document.getElementById("todo-content-title-input");
 
 function inputBoxKeyDown(event) {
   /*
@@ -26,12 +26,12 @@ function inputBoxKeyDown(event) {
 }
 
 function appendTodoContent() {
-  if (inputBox.value === "") {
+  if (titleInput.value === "") {
     return;
   }
-  contentList.appendChild(createContent(inputBox.value));
-  localStorage.setItem(inputBox.value, "");
-  inputBox.value = "";
+  contentList.appendChild(createContent(titleInput.value));
+  localStorage.setItem(titleInput.value, "");
+  titleInput.value = "";
 }
 
 function createContent(title) {
@@ -58,5 +58,5 @@ for (var i = 0; i < localStorage.length; ++i) {
   contentList.appendChild(createContent(localStorage.key(i)));
 }
 
-inputBox.onkeyup = inputBoxKeyDown;
+titleInput.onkeyup = inputBoxKeyDown;
 registerButton.onclick = appendTodoContent;
