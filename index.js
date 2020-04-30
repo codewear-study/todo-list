@@ -46,10 +46,17 @@ function createContent(title) {
    * manage event handlers.
    */
   content.key = title;
+  content.tabIndex = 0;
   content.appendChild(document.createTextNode(title));
   content.onclick = function (event) {
     localStorage.removeItem(event.target.key);
     event.target.remove();
+  };
+  content.onkeyup = function (event) {
+    if (event.key === "Delete") {
+      localStorage.removeItem(event.target.key);
+      event.target.remove();
+    }
   };
   return content;
 }
