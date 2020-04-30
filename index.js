@@ -4,7 +4,19 @@ var index = {
   inputBox: document.getElementById("element-name"),
 
   InputBoxKeyDown: function (event) {
-    if (event.keyCode === 13) {
+    /*
+     - if (event.keyCode === 13) {
+     + if (event.code === "Enter") {
+     * KeyboardEvent.keyCode was deprecated. Use KeyboardEvent.code instead.
+     *
+     - if (event.code === "Enter") {
+     + if (event.key === "Enter") {
+     * Using KeyboardEvent.key is better. Because KeyboardEvent.code based on
+     * QWERTY keyboard. So, other keyboard like Dvorak or AZERTY behave weird.
+     * e.g. KeyboardEvent.key === "KeyQ" in QWERTY is "Q" key, but, "'" key in
+     * Dvorak.
+     */
+    if (event.key === "Enter") {
       event.preventDefault();
       index.registerButton.click();
     }
