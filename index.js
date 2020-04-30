@@ -15,6 +15,10 @@ var index = {
      * QWERTY keyboard. So, other keyboard like Dvorak or AZERTY behave weird.
      * e.g. KeyboardEvent.key === "KeyQ" in QWERTY is "Q" key, but, "'" key in
      * Dvorak.
+     * Additional. KeyboardEvent.key recognize system input method.
+     * e.g. RightAlt key in english keyboard become HangulMode in korean
+     * keyboard. Space key in english keyboard become empty value in japanese
+     * keyboard when change kana to kanji.
      */
     if (event.key === "Enter") {
       event.preventDefault();
