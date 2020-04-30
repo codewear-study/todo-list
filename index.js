@@ -1,50 +1,62 @@
-var index = {
-  contentList: document.getElementById("todo-list"),
-  registerButton: document.getElementById("register-button"),
-  inputBox: document.getElementById("element-name"),
+const contentList = document.getElementById("todo-list");
+const registerButton = document.getElementById("register-button");
+const inputBox = document.getElementById("element-name");
 
-  InputBoxKeyDown: function (event) {
-    /*
-     - if (event.keyCode === 13) {
-     + if (event.code === "Enter") {
-     * KeyboardEvent.keyCode was deprecated. Use KeyboardEvent.code instead.
-     *
-     - if (event.code === "Enter") {
-     + if (event.key === "Enter") {
-     * Using KeyboardEvent.key is better. Because KeyboardEvent.code based on
-     * QWERTY keyboard. So, other keyboard like Dvorak or AZERTY behave weird.
-     * e.g. KeyboardEvent.key === "KeyQ" in QWERTY is "Q" key, but, "'" key in
-     * Dvorak.
-     * Additional. KeyboardEvent.key recognize system input method.
-     * e.g. RightAlt key in english keyboard become HangulMode in korean
-     * keyboard. Space key in english keyboard become empty value in japanese
-     * keyboard when change kana to kanji.
-     */
-    if (event.key === "Enter") {
-      event.preventDefault();
-      index.registerButton.click();
-    }
-  },
-  appendTodoContent: function () {
-    if (index.inputBox.value === "") {
-      return;
-    }
-    const contentTitle = index.inputBox.value;
-    index.inputBox.value = "";
-    var content = document.createElement("li");
-    content.innerHTML = contentTitle;
-    content.style["user-select"] = "none";
-    content.style["-webkit-user-select"] = "none";
-    content.style["-khtml-user-select"] = "none";
-    content.style["-moz-user-select"] = "none";
-    content.style["-ms-user-select"] = "none";
-    content.onclick = (event) => {
-      event.target.remove();
-    };
-    index.contentList.appendChild(content);
-  },
-};
-(function init() {
-  index.inputBox.onkeyup = index.InputBoxKeyDown;
-  index.registerButton.onclick = index.appendTodoContent;
-})();
+function inputBoxKeyDown(event) {
+  /*
+   - if (event.keyCode === 13) {
+   + if (event.code === "Enter") {
+   * KeyboardEvent.keyCode was deprecated. Use KeyboardEvent.code instead.
+   *
+   - if (event.code === "Enter") {
+   + if (event.key === "Enter") {
+   * Using KeyboardEvent.key is better. Because KeyboardEvent.code based on
+   * QWERTY keyboard. So, other keyboard like Dvorak or AZERTY behave weird.
+   * e.g. KeyboardEvent.key === "KeyQ" in QWERTY is "Q" key, but, "'" key in
+   * Dvorak.
+   * Additional. KeyboardEvent.key recognize system input method.
+   * e.g. RightAlt key in english keyboard become HangulMode in korean
+   * keyboard. Space key in english keyboard become empty value in japanese
+   * keyboard when change kana to kanji.
+   */
+  if (event.key === "Enter") {
+    event.preventDefault();
+    registerButton.click();
+  }
+}
+
+function appendTodoContent() {
+  if (inputBox.value === "") {
+    return;
+  }
+  contentList.appendChild(createContent(inputBox.value));
+  localStorage.setItem(inputBox.value, "");
+  inputBox.value = "";
+}
+
+function createContent(title) {
+  let content = document.createElement("li");
+  content.classList.add("content-title");
+  /*
+   - content.innerHTML = title;
+   + content.appendChild(document.createTextNode(title));
+   *
+   * changing innerHTML attribute all inner DOM nodes will re-placed and
+   * recreated. Also, when change innerHTML attribute, you should manually
+   * manage event handlers.
+   */
+  content.key = title;
+  content.appendChild(document.createTextNode(title));
+  content.onclick = function (event) {
+    localStorage.removeItem(event.target.key);
+    event.target.remove();
+  };
+  return content;
+}
+
+for (var i = 0; i < localStorage.length; ++i) {
+  contentList.appendChild(createContent(localStorage.key(i)));
+}
+
+inputBox.onkeyup = inputBoxKeyDown;
+registerButton.onclick = appendTodoContent;
