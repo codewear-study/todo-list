@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" http-equiv="Content-Type" content="text/html">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <button id="create btn" class="btn btn-primary">
+            할일 만들기
+        </button>
+    </header>
+    <br>
+    <div id="create form" style="display: none;">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">TITLE</span>
+            </div>
+            <input type="text" id="todo title" class="form-control" placeholder="할일 제목?" />
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">WHO</span>
+            </div>
+            <input type="text" id="todo who" class="form-control" placeholder="누가 할건가요?" />
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">WHEN</span>
+                <input type="date" id="todo when" class="form-control" />
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">WHAT</span>
+            </div>
+            <textarea id="todo what" class="form-control" placeholder="무엇을 할건가요?"></textarea>
+        </div>
+        <button type="submit" id="submit btn" class="btn btn-primary">
+            만들기
+        </button>
+    </div>
+    <div id="todo-list">
+
+    </div>
+</body>
+
+<script src="../js/TodoItem.js"></script>
+<script src="../js/index.js"></script>
+
+</html>
